@@ -1,11 +1,10 @@
-import {React, useState, useEffect } from "react";
+import {React, useState } from "react";
 import Layout from "../../components/Layout";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Input from '../../components/UI/Input';
 import { login } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from "react-router-dom";
-import {isUserLoggedIn} from "../../actions";
 
 function Signin() {
   const [password, setPassword] = useState('');
@@ -14,12 +13,6 @@ function Signin() {
 
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-      //when user is logged in it will not redirect to sigin page
-      if(!auth.authenticate){
-        dispatch(isUserLoggedIn());
-      }
-  },[])
 
   const userLogin = (e) => {
 
