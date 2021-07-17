@@ -3,11 +3,13 @@ import Layout from "../../components/Layout";
 import { Container, Row, Col, Button, Table, Modal, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {getAllCategory, addCategory} from '../../actions'
+import {useHistory} from 'react-router-dom';
 
 function Category(props) {
   const [categoryName, setCategoryName] = useState("");
   const [show, setShow] = useState(false);
-  
+  const history = useHistory()
+
   const handleClose = () => {
 
     if (categoryName === "") {
@@ -19,6 +21,7 @@ function Category(props) {
       categoryName
     }
     dispatch(addCategory(catData));
+    history.push("/category")
     setShow(false);
 
   }
@@ -37,6 +40,9 @@ function Category(props) {
 // debugger
 //     dispatch(addCategory(categoryName));
 //   };
+
+async function deleteData(_id) { 
+}
 
 
   function Example() {
@@ -95,8 +101,8 @@ function Category(props) {
                 <td>{index + 1}</td>
                 <td>{item.categoryName}</td>
                 <td>
-                  {/* <Button
-                    style={{ margin: "8px", cursor:"pointer"}}
+                  <Button
+                    style={{ margin: "1px", cursor:"pointer"}}
 
                     variant="danger"
                     onClick={() => {
@@ -105,7 +111,7 @@ function Category(props) {
                   >
                     Delete
                   </Button>
-                  <Link to={"update/"+item._id}>
+                  {/* <Link to={"update/"+item._id}>
                   <Button
                   style={{ margin: "8px" }}
                     variant="primary"
