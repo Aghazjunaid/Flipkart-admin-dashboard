@@ -1,13 +1,27 @@
 import React, {useEffect, useState} from "react";
 import Layout from "../../components/Layout";
-import { Container, Row, Col, Button, Table, Modal } from "react-bootstrap";
+import { Container, Row, Col, Button, Table, Modal, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import {getAllCategory} from '../../actions'
+import {getAllCategory, addCategory} from '../../actions'
 
 function Category(props) {
+  const [categoryName, setCategoryName] = useState("");
   const [show, setShow] = useState(false);
   
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+
+    if (categoryName === "") {
+        alert('Category name is required');
+        setShow(false);
+        return;
+    }
+    const catData = {
+      categoryName
+    }
+    dispatch(addCategory(catData));
+    setShow(false);
+
+  }
   const handleShow = () => setShow(true);
 
   const dispatch = useDispatch();
@@ -17,23 +31,38 @@ function Category(props) {
     dispatch(getAllCategory())
   },[])
 
+//   const addCategory = (e) => {
+//     e.preventDefault();
+//     handleClose();
+// debugger
+//     dispatch(addCategory(categoryName));
+//   };
+
+
   function Example() {
   
     return (
       <>  
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title style={{textDecoration: "center"}}>Add Category</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
+          <Modal.Body>
+          <Form>
+              <Form.Group>
+                <Form.Label>Category Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={categoryName}
+                  onChange={(e) => setCategoryName(e.target.value)}
+                  placeholder="Enter Category"
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit" onClick={handleClose}>
+                Add Category
+              </Button>
+            </Form>
+          </Modal.Body>
         </Modal>
       </>
     );
