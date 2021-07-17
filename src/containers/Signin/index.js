@@ -25,7 +25,7 @@ function Signin() {
       dispatch(login(user));
   }
 
-  if(auth){
+  if(auth.authenticate){
     return <Redirect to={'/'} />
   }
 

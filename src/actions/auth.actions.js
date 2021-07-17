@@ -11,7 +11,7 @@ export const login = (user) => {
         const res = await axios.post(`/login`, {
             ...user
         });
-debugger
+
         if(res.status === 200){
             const { token } = res.data.data;
             localStorage.setItem('token', token);
