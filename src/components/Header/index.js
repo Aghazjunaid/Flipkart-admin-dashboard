@@ -46,7 +46,7 @@ function Header() {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" style={{backgroundColor: 'red', zIndex: 1}} variant="dark">
+      <Navbar collapseOnSelect expand="lg" style={{backgroundColor: 'red', zIndex: 1}} variant="dark" >
         <Container fluid>
           {/* <Navbar.Brand href="#home">Admin Dashboard</Navbar.Brand> */}
           <Link to="/" className="navbar-brand font-weight-bold">Admin Dashboard</Link>
