@@ -7,9 +7,10 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type){
         case productConstants.GET_ALL_PRODUCTS_SUCCESS:
+            debugger
             state = {
                 ...state,
-                products: action.payload.products
+                products: action.payload.productList
             }
             break;
     }
