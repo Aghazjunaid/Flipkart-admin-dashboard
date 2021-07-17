@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Layout from "../../components/Layout";
 import { Container, Row, Col, Button, Table, Modal, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import {getAllCategory, addCategory} from '../../actions'
+import {getAllCategory, addCategory, deleteCategories} from '../../actions'
 import {useHistory} from 'react-router-dom';
 
 function Category(props) {
@@ -42,6 +42,9 @@ function Category(props) {
 //   };
 
 async function deleteData(_id) { 
+  dispatch(deleteCategories(_id));
+  history.push("/category")
+
 }
 
 
