@@ -10,10 +10,18 @@ import {
   Form,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCategory, addCategory, deleteCategories } from "../../actions";
+import { getProducts } from "../../actions";
 import { useHistory } from "react-router-dom";
 
 function Products() {
+    const dispatch = useDispatch();
+    const product = useSelector((state) => state.product.products);
+  
+    useEffect(()=>{
+      dispatch(getProducts())
+    },[])
+  
+
   return (
     <Layout sidebar>
       <Container>
