@@ -1,10 +1,15 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Layout from "../../components/Layout";
-import { Container, Row, Col, Button, Table } from "react-bootstrap";
+import { Container, Row, Col, Button, Table, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {getAllCategory} from '../../actions'
 
 function Category(props) {
+  const [show, setShow] = useState(false);
+  
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category.categories);
 
@@ -12,6 +17,28 @@ function Category(props) {
     dispatch(getAllCategory())
   },[])
 
+  function Example() {
+  
+    return (
+      <>  
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+  
 
   return (
     <Layout sidebar>
@@ -20,10 +47,11 @@ function Category(props) {
           <Col md={12}>
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px", marginBottom: "20px" }}>
               <h3>Category</h3>
-              <Button variant="danger">Add</Button>
+              <Button variant="danger" onClick={handleShow}>Add</Button>
             </div>
           </Col>
         </Row>
+        <Example/>
         <Table striped bordered hover responsive>
           <thead>
             <tr>
