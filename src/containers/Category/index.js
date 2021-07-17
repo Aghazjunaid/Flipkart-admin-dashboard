@@ -1,22 +1,29 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Layout from "../../components/Layout";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Table } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import {getAllCategory} from '../../actions'
 
 function Category(props) {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getAllCategory())
+  },[])
+
+
   return (
     <Layout sidebar>
       <Container>
         <Row>
           <Col md={12}>
-            <Row style={{marginTop: '10px'}}>
-              <Col md={4} style={{ fontSize: '25px'}}>Category</Col>
-              <Col
-                md={{ span: 4, offset: 4 }} style={{textAlign: 'center'}}>
-                    <Button variant="danger">Add</Button>
-                </Col>
-            </Row>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px" }}>
+              <h3>Category</h3>
+              <Button variant="danger">Add</Button>
+            </div>
           </Col>
         </Row>
+        
       </Container>
     </Layout>
   );
