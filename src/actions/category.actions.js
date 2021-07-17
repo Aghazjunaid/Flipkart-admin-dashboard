@@ -59,7 +59,7 @@ export const deleteCategories = (ids) => {
         dispatch({ type: categoryConstansts.DELETE_CATEGORIES_REQUEST });
         const res = await axios.delete(`/category/${ids}`, {
         });
-        if (res.status == 200) {
+        if (res.status === 200) {
             dispatch({ type: categoryConstansts.DELETE_CATEGORIES_SUCCESS });
         } else {
             const { error } = res.data;
