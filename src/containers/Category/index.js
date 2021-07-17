@@ -105,7 +105,7 @@ async function deleteData(_id) {
                 <td>{item.categoryName}</td>
                 <td>
                   <Button
-                    style={{ margin: "1px", cursor:"pointer"}}
+                    style={{ cursor:"pointer"}}
 
                     variant="danger"
                     onClick={() => {
