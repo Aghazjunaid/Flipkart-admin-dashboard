@@ -17,7 +17,7 @@ const Layout = (props) => {
          props.sidebar ?
          <Container fluid>
           <Row>
-            <Col md={2} className="sidebar" style={{backgroundColor: "rgb(218 33 33)"}}>
+            <Col md={2} className="sidebar" style={{backgroundColor: "rgb(231 229 247)"}}>
               <ul>
                 <li><NavLink exact to={`/`}>Home</NavLink></li>
                 <li><NavLink to={`/category`}>Category</NavLink></li>
