@@ -8,6 +8,7 @@ export const getProducts = () => {
         let productList = [];
       dispatch({ type: productConstants.GET_ALL_PRODUCTS_REQUEST });
       const res = await axios.get(`/product`);
+      debugger
       if (res.status === 200) {
         productList = res.data;
         dispatch({
