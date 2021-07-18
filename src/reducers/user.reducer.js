@@ -34,8 +34,7 @@ export default (state = initState, action) => {
     case userContants.GET_ALL_USERS_REQUEST:
       state = {
         ...state,
-        loading: false,
-        error: action.payload.error,
+        loading: true,
       };
       break;
     case userContants.GET_ALL_USERS_SUCCESS:
