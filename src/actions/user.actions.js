@@ -29,3 +29,28 @@ export const signup = (user) => {
         }
     }
 }
+
+
+export const getUsers = () => {
+    return async (dispatch) => {
+      try {
+          let usertList = [];
+        dispatch({ type: userContants.GET_ALL_USERS_REQUEST });
+        const res = await axios.get(`/user`);
+        debugger
+        if (res.status === 200) {
+            usertList = res.data.data;
+          debugger
+          dispatch({
+            type: userContants.GET_ALL_USERS_SUCCESS,
+            payload: { productList },
+          });
+        } else {
+          dispatch({ type: userContants.GET_ALL_USERS_FAILURE });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+  
