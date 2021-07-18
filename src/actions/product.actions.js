@@ -54,3 +54,20 @@ export const addProduct = (proData) => {
   }
 }
 
+export const deleteProducts = (ids) => {
+  return async dispatch => {
+      dispatch({ type: categoryConstansts.DELETE_PRODUCT_BY_ID_REQUEST });
+      const res = await axios.delete(`/product/${ids}`, {
+      });
+      if (res.status === 200) {
+          dispatch({ type: categoryConstansts.DELETE_PRODUCT_BY_ID_SUCCESS });
+      } else {
+          const { error } = res.data;
+          dispatch({
+              type: categoryConstansts.DELETE_PRODUCT_BY_ID_FAILURE,
+              payload: { error }
+          });
+      }
+  }
+}
+
