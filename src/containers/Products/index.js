@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import {
   Container,
@@ -8,9 +8,36 @@ import {
   Table, Form, Modal
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "../../actions";
+import { getProducts, addProduct } from "../../actions";
+import {useHistory} from 'react-router-dom';
 
 function Products() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState();
+  const [currency, setCurrency] = useState("");
+  const [category, setCategory] = useState("");
+  const history = useHistory()
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+debugger
+    const proData = {
+      name,
+      description,
+      price,
+      currency,
+      category
+    }
+    dispatch(addProduct(proData));
+    history.push("/product")
+
+    setShow(false);
+
+  }
+  const handleShow = () => setShow(true);
+
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product);
   
@@ -27,14 +54,23 @@ function Products() {
               <Modal.Title style={{textDecoration: "center"}}>Add Product</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <Form onSubmit={addProduct}>
+            <Form>
               <Form.Group>
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Product</Form.Label>
                 <Form.Control
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter Product"
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Category</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  placeholder="Enter Category"
                 />
               </Form.Group>
               <Form.Group>
@@ -54,6 +90,7 @@ function Products() {
                       value={currency}
                       onChange={(e) => setCurrency(e.target.value)}
                     >
+                      <option>Select Currency</option>
                       <option value="Dollar">Dollar</option>
                       <option value="Rupee">Rupee</option>
                       <option value="Euro">Euro</option>
@@ -70,7 +107,7 @@ function Products() {
                   placeholder="Enter Description"
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" onClick={handleClose}>
                 Add Product
               </Button>
             </Form>
@@ -97,12 +134,13 @@ function Products() {
               }}
             >
               <h3>Product</h3>
-              <Button variant="danger">
+              <Button variant="danger" onClick={handleShow}>
                 Add
               </Button>
             </div>
           </Col>
         </Row>
+        <Example/>
         <Table striped bordered hover responsive>
           <thead>
             <tr>
