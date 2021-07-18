@@ -31,7 +31,7 @@ export const addProduct = (proData) => {
 
   return async dispatch => {
       
-      dispatch({ type: categoryConstansts.ADD_PRODUCT_REQUEST });
+      dispatch({ type: productConstants.ADD_PRODUCT_REQUEST });
       const res = await axios.post(`product`, {
           ...proData
       });
@@ -42,12 +42,12 @@ export const addProduct = (proData) => {
           const addedProduct = res.data;
 
           dispatch({  
-              type: categoryConstansts.ADD_PRODUCT_SUCCESS,
+              type: productConstants.ADD_PRODUCT_SUCCESS,
               payload:  addedProduct 
           });
       } else {
           dispatch({
-              type: categoryConstansts.ADD_PRODUCT_FAILURE,
+              type: productConstants.ADD_PRODUCT_FAILURE,
               payload: { error: res.data.error }
           });
       }

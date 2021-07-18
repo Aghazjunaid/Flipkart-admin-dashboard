@@ -5,7 +5,7 @@ import {
   Row,
   Col,
   Button,
-  Table,
+  Table, Form, Modal
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../actions";
@@ -18,6 +18,70 @@ function Products() {
       dispatch(getProducts())
     },[])
   
+    function Example() {
+  
+      return (
+        <>  
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title style={{textDecoration: "center"}}>Add Product</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <Form onSubmit={addProduct}>
+              <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter Product"
+                />
+              </Form.Group>
+              <Form.Group>
+                <Row>
+                  <Col>
+                    <Form.Label>Price</Form.Label>
+                    <Form.Control
+                      placeholder="Enter price"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Label>Select Currency</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={currency}
+                      onChange={(e) => setCurrency(e.target.value)}
+                    >
+                      <option value="Dollar">Dollar</option>
+                      <option value="Rupee">Rupee</option>
+                      <option value="Euro">Euro</option>
+                    </Form.Control>
+                  </Col>
+                </Row>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Enter Description"
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                Add Product
+              </Button>
+            </Form>
+            </Modal.Body>
+          </Modal>
+        </>
+      );
+    }
+  
+
+
 
   return (
     <Layout sidebar>
