@@ -28,7 +28,7 @@ function User() {
           <Row>
             <Col md={12}>
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px", marginBottom: "20px" }}>
-                <h3>Category</h3>
+                <h3>Users</h3>
                 {/* <Button variant="danger" onClick={handleShow}>Add</Button> */}
               </div>
             </Col>
@@ -42,6 +42,7 @@ function User() {
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Address</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -52,7 +53,7 @@ function User() {
                   {item.role && <td>{item.role.name}</td>}
                   <td>{item.email}</td>
                   <td>{item.phone}</td>
-                  <td>{item.profile.addressLine_1, item.profile.city , item.profile.state ,item.profile.zipcode}</td>
+                  <td>{item.profile.addressLine_1}, {item.profile.city}, {item.profile.state}, {item.profile.zipcode}</td>
 
                   <td>
                     {/* <Button
