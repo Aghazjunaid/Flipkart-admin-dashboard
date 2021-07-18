@@ -1,23 +1,23 @@
 import axios from "../helpers/axios";
-import { productConstants } from "./constants";
+import { orderConstants } from "./constants";
 
 // new action
 export const getOrders = () => {
   return async (dispatch) => {
     try {
         let orderList = [];
-      dispatch({ type: productConstants.GET_ALL_PRODUCTS_REQUEST });
+      dispatch({ type: orderConstants.GET_CUSTOMER_ORDER_REQUEST });
       const res = await axios.get(`/order`);
       debugger
       if (res.status === 200) {
         orderList = res.data.data;
         debugger
         dispatch({
-          type: productConstants.GET_ALL_PRODUCTS_SUCCESS,
+          type: orderConstants.GET_CUSTOMER_ORDER_SUCCESS,
           payload: { orderList },
         });
       } else {
-        dispatch({ type: productConstants.GET_ALL_PRODUCTS_FAILURE });
+        dispatch({ type: orderConstants.GET_CUSTOMER_ORDER_FAILURE });
       }
     } catch (error) {
       console.log(error);
