@@ -37,9 +37,9 @@ console.log("orders", order)
                 <th>Status</th>
                 <th>Product</th>
                 <th>Quantity</th>
-                {/* <th>Delivery Address</th> */}
+                <th>Delivery Address</th>
                 <th>Total Price</th>
-                <th>Actions</th>
+                {/* <th>Actions</th> */}
               </tr>
             </thead>
             <tbody>
@@ -49,10 +49,9 @@ console.log("orders", order)
                   <td>{item.status}</td>
                   <td>{item.product.productId.name}</td>
                   <td>{item.product.quantity}</td>
-                  {/* <td>{item.deliveryAddress.addressLine_1}, {item.deliveryAddress.city}, {item.deliveryAddress.state}, {item.deliveryAddress.pincode}</td> */}
+                  <td>{item.deliveryAddress.addressLine_1}, {item.deliveryAddress.city}, {item.deliveryAddress.state}, {item.deliveryAddress.pincode}</td>
                   <td>Rs {item.charges.total.toFixed(2)}</td>
 
-                  <td>
                     {/* <Button
                       style={{ cursor:"pointer"}}
   
@@ -72,7 +71,6 @@ console.log("orders", order)
                     </Button>
   
                     </Link> */}
-                  </td>
                 </tr>
               ))}
             </tbody>
