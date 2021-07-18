@@ -46,14 +46,21 @@ function Products() {
     dispatch(getProducts());
   }, []);
 
-  const createCategoryList = (categories, options = []) => {
+  // const createCategoryList = (categories, options = []) => {
     
-    for (let category of categories) {
-      options.push({ value: category._id, name: category.categoryName });
-    }
+  //   for (let category of categories) {
+  //     options.push({ value: category._id, name: category.categoryName });
+  //   }
 
-    return options;
-  };
+  //   return options;
+  // };
+
+  async function deleteData(_id) { 
+    dispatch(deleteProducts(_id));
+    history.push("/products")
+  
+  }
+  
 
   function Example() {
     return (
@@ -180,8 +187,8 @@ function Products() {
                     <td>{item.price}</td>
                     <td>{item.currency}</td>
                     <td>
-                      {/* <Button
-                    style={{ margin: "8px", cursor:"pointer"}}
+                      <Button
+                    style={{ cursor:"pointer"}}
 
                     variant="danger"
                     onClick={() => {
@@ -190,7 +197,7 @@ function Products() {
                   >
                     Delete
                   </Button>
-                  <Link to={"update/"+item._id}>
+                  {/* <Link to={"update/"+item._id}>
                   <Button
                   style={{ margin: "8px" }}
                     variant="primary"
