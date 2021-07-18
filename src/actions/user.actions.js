@@ -11,9 +11,9 @@ export const signup = (user) => {
         const res = await axios.post(`/register`, {
             ...user
         });
-debugger
+
         if(res.status === 200){
-            debugger
+            
             const { message } = res.data.data;
             dispatch({
                 type: userContants.USER_REGISTER_SUCCESS,
