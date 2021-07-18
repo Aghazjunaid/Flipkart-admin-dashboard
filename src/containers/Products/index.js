@@ -5,11 +5,13 @@ import {
   Row,
   Col,
   Button,
-  Table, Form, Modal
+  Table,
+  Form,
+  Modal,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, addProduct } from "../../actions";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 function Products() {
   const [name, setName] = useState("");
@@ -17,43 +19,52 @@ function Products() {
   const [price, setPrice] = useState();
   const [currency, setCurrency] = useState("");
   const [category, setCategory] = useState("");
-  const history = useHistory()
+  const history = useHistory();
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
-debugger
     const proData = {
       name,
       description,
       price,
       currency,
-      category
-    }
+      category,
+    };
     dispatch(addProduct(proData));
-    history.push("/product")
+    history.push("/products");
 
     setShow(false);
-
-  }
+  };
   const handleShow = () => setShow(true);
 
-    const dispatch = useDispatch();
-    const product = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product);
+  const categoryStore = useSelector((state) => state.category);
   
-    useEffect(()=>{
-      dispatch(getProducts())
-    },[])
-  
-    function Example() {
-  
-      return (
-        <>  
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title style={{textDecoration: "center"}}>Add Product</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
+  const createCategoryList = (categories, options = []) => {
+    
+    for (let category of categories) {
+      options.push({ value: category._id, name: category.categoryName });
+    }
+
+    return options;
+  };
+
+  function Example() {
+    return (
+      <>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title style={{ textDecoration: "center" }}>
+              Add Product
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Form>
               <Form.Group>
                 <Form.Label>Product</Form.Label>
@@ -67,11 +78,19 @@ debugger
               <Form.Group>
                 <Form.Label>Category</Form.Label>
                 <Form.Control
-                  type="text"
+                  as="select"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  placeholder="Enter Category"
-                />
+                >
+                  <option>Select Category</option>
+                  {categoryStore.categories.map(
+                    (option) => (
+                      <option key={option._id} value={option._id}>
+                        {option.categoryName}
+                      </option>
+                    )
+                  )}
+                </Form.Control>
               </Form.Group>
               <Form.Group>
                 <Row>
@@ -111,14 +130,11 @@ debugger
                 Add Product
               </Button>
             </Form>
-            </Modal.Body>
-          </Modal>
-        </>
-      );
-    }
-  
-
-
+          </Modal.Body>
+        </Modal>
+      </>
+    );
+  }
 
   return (
     <Layout sidebar>
@@ -140,7 +156,7 @@ debugger
             </div>
           </Col>
         </Row>
-        <Example/>
+        <Example />
         <Table striped bordered hover responsive>
           <thead>
             <tr>
@@ -154,17 +170,17 @@ debugger
             </tr>
           </thead>
           <tbody>
-            {product.products.length > 0 ?
-                product.products.map((item, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{item.name}</td>
-                <td>{item.category.categoryName}</td>
-                <td>{item.description}</td>
-                <td>{item.price}</td>
-                <td>{item.currency}</td>
-                <td>
-                  {/* <Button
+            {product.products.length > 0
+              ? product.products.map((item, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.category.categoryName}</td>
+                    <td>{item.description}</td>
+                    <td>{item.price}</td>
+                    <td>{item.currency}</td>
+                    <td>
+                      {/* <Button
                     style={{ margin: "8px", cursor:"pointer"}}
 
                     variant="danger"
@@ -183,12 +199,12 @@ debugger
                   </Button>
 
                   </Link> */}
-                </td>
-              </tr>
-            )): null}
+                    </td>
+                  </tr>
+                ))
+              : null}
           </tbody>
         </Table>
-
       </Container>
     </Layout>
   );
