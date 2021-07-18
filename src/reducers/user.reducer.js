@@ -38,6 +38,7 @@ export default (state = initState, action) => {
       };
       break;
     case userContants.GET_ALL_USERS_SUCCESS:
+        debugger
       state = {
         ...state,
         loading: false,
