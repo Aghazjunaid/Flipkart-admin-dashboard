@@ -10,7 +10,8 @@ export const getProducts = () => {
       const res = await axios.get(`/product`);
       debugger
       if (res.status === 200) {
-        productList = res.data;
+        productList = res.data.data;
+        debugger
         dispatch({
           type: productConstants.GET_ALL_PRODUCTS_SUCCESS,
           payload: { productList },
