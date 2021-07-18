@@ -44,6 +44,7 @@ function Products() {
             <tr>
               <th>#</th>
               <th>Product Name</th>
+              <th>Category</th>
               <th>Desciption</th>
               <th>Price</th>
               <th>Currency</th>
@@ -51,11 +52,12 @@ function Products() {
             </tr>
           </thead>
           <tbody>
-            {product.products.data.length > 0 ?
-                product.products.data.map((item, index) => (
+            {product.products.length > 0 ?
+                product.products.map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
+                <td>{item.category.categoryName}</td>
                 <td>{item.description}</td>
                 <td>{item.price}</td>
                 <td>{item.currency}</td>
