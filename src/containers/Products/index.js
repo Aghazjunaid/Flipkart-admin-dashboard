@@ -10,7 +10,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts, addProduct } from "../../actions";
+import { getProducts, addProduct, deleteProducts } from "../../actions";
 import { useHistory } from "react-router-dom";
 
 function Products() {
