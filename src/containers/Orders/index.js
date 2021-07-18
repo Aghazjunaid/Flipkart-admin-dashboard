@@ -13,7 +13,8 @@ import { useHistory } from "react-router-dom";
 
 function Orders() {
     const dispatch = useDispatch();
-
+    const order = useSelector((state) => state.order);
+console.log("orders", order)
     useEffect(()=>{
         dispatch(getOrders())
       },[])
@@ -24,7 +25,7 @@ function Orders() {
           <Row>
             <Col md={12}>
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px", marginBottom: "20px" }}>
-                <h3>Users</h3>
+                <h3>Orders</h3>
                 {/* <Button variant="danger" onClick={handleShow}>Add</Button> */}
               </div>
             </Col>
@@ -32,24 +33,24 @@ function Orders() {
           <Table striped bordered hover responsive>
             <thead>
               <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
+                <th>Order No.</th>
+                <th>Status</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                {/* <th>Delivery Address</th> */}
+                <th>Total Price</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {user.users.map((item, index) => (
+              {order.orders.map((item, index) => (
                 <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{item.name}</td>
-                  {item.role && <td>{item.role.name}</td>}
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
-                  <td>{item.profile.addressLine_1}, {item.profile.city}, {item.profile.state}, {item.profile.zipcode}</td>
+                  <td>{item.orderNumber}</td>
+                  <td>{item.status}</td>
+                  <td>{item.product.productId.name}</td>
+                  <td>{item.product.quantity}</td>
+                  {/* <td>{item.deliveryAddress.addressLine_1}, {item.deliveryAddress.city}, {item.deliveryAddress.state}, {item.deliveryAddress.pincode}</td> */}
+                  <td>Rs {item.charges.total.toFixed(2)}</td>
 
                   <td>
                     {/* <Button
