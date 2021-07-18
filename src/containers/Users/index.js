@@ -13,6 +13,14 @@ import { useHistory } from "react-router-dom";
 
 function User() {
 
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    console.log("user", user)
+
+    useEffect(()=>{
+        dispatch(getUsers())
+      },[])
+    
 
     return (
         <Layout sidebar>
@@ -28,16 +36,24 @@ function User() {
           <Table striped bordered hover responsive>
             <thead>
               <tr>
-                <th>Serial No.</th>
-                <th>Category Name</th>
-                <th>Actions</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
               </tr>
             </thead>
             <tbody>
-              {category.map((item, index) => (
+              {user.users.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item.categoryName}</td>
+                  <td>{item.name}</td>
+                  {item.role && <td>{item.role.name}</td>}
+                  <td>{item.email}</td>
+                  <td>{item.phone}</td>
+                  <td>{item.profile.addressLine_1, item.profile.city , item.profile.state ,item.profile.zipcode}</td>
+
                   <td>
                     {/* <Button
                       style={{ cursor:"pointer"}}
