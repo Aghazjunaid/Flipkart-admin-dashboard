@@ -54,3 +54,20 @@ export const getUsers = () => {
     };
   };
   
+export const deleteUsers = (ids) => {
+  return async dispatch => {
+      dispatch({ type: userContants.DELETE_USER_BY_ID_REQUEST });
+      const res = await axios.delete(`/user/${ids}`, {
+      });
+      if (res.status === 200) {
+          dispatch({ type: userContants.DELETE_USER_BY_ID_SUCCESS });
+      } else {
+          const { error } = res.data;
+          dispatch({
+              type: userContants.DELETE_USER_BY_ID_FAILURE,
+              payload: { error }
+          });
+      }
+  }
+}
+  
