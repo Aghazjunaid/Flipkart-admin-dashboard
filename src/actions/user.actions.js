@@ -43,7 +43,7 @@ export const getUsers = () => {
           debugger
           dispatch({
             type: userContants.GET_ALL_USERS_SUCCESS,
-            payload: { productList },
+            payload: { usertList },
           });
         } else {
           dispatch({ type: userContants.GET_ALL_USERS_FAILURE });
