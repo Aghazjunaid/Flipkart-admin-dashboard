@@ -8,10 +8,11 @@ import {
   Table,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers, } from "../../actions";
+import { getUsers, deleteUsers } from "../../actions";
 import { useHistory } from "react-router-dom";
 
 function User() {
+    const history = useHistory()
 
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
@@ -21,6 +22,11 @@ function User() {
         dispatch(getUsers())
       },[])
     
+    async function deleteData(_id) { 
+    dispatch(deleteUsers(_id));
+    history.push("/users")
+    }
+      
 
     return (
         <Layout sidebar>
@@ -56,7 +62,7 @@ function User() {
                   <td>{item.profile.addressLine_1}, {item.profile.city}, {item.profile.state}, {item.profile.zipcode}</td>
 
                   <td>
-                    {/* <Button
+                    <Button
                       style={{ cursor:"pointer"}}
   
                       variant="danger"
@@ -65,7 +71,7 @@ function User() {
                       }}
                     >
                       Delete
-                    </Button> */}
+                    </Button>
                     {/* <Link to={"update/"+item._id}>
                     <Button
                     style={{ margin: "8px" }}
